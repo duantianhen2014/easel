@@ -40,6 +40,8 @@ class SettingsController extends Controller
             'blogSeo' => Settings::blogSeo(),
             'blogAuthor' => Settings::blogAuthor(),
             'disqus' => Settings::disqus(),
+            'changyan_appid' => Settings::changyanAppid(),
+            'changyan_conf' => Settings::changyanConf(),
             'analytics' => Settings::gaId(),
             'twitterCardType' => Settings::twitterCardType(),
             'themes' => collect($this->themeManager->getThemes()->toArray())->pluck('name', 'id'),
@@ -85,12 +87,15 @@ class SettingsController extends Controller
      */
     public function store(SettingsUpdateRequest $request)
     {
+        dd($request);
         Settings::updateOrCreate(['setting_name' => 'blog_title'], ['setting_value' => $request->toArray()['blog_title']]);
         Settings::updateOrCreate(['setting_name' => 'blog_subtitle'], ['setting_value' => $request->toArray()['blog_subtitle']]);
         Settings::updateOrCreate(['setting_name' => 'blog_description'], ['setting_value' => $request->toArray()['blog_description']]);
         Settings::updateOrCreate(['setting_name' => 'blog_seo'], ['setting_value' => $request->toArray()['blog_seo']]);
         Settings::updateOrCreate(['setting_name' => 'blog_author'], ['setting_value' => $request->toArray()['blog_author']]);
         Settings::updateOrCreate(['setting_name' => 'disqus_name'], ['setting_value' => $request->toArray()['disqus_name']]);
+        Settings::updateOrCreate(['setting_name' => 'changyan_appid'], ['setting_value' => $request->toArray()['changyan_appid']]);
+        Settings::updateOrCreate(['setting_name' => 'changyan_conf'], ['setting_value' => $request->toArray()['changyan_conf']]);
         Settings::updateOrCreate(['setting_name' => 'ga_id'], ['setting_value' => $request->toArray()['ga_id']]);
         Settings::updateOrCreate(['setting_name' => 'twitter_card_type'], ['setting_value' => $request->toArray()['twitter_card_type']]);
         Settings::updateOrCreate(['setting_name' => 'custom_css'], ['setting_value' => $request->toArray()['custom_css']]);
